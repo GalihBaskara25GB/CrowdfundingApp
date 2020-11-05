@@ -3,20 +3,26 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use App\Traits\UuidTrait;
-
+// use App\Traits\UuidTrait;
 
 class Otp_code extends Model
 {
-    use Notifiable;
+    
+    protected $table = 'roles';
+    protected $guarded = [];
 
     protected static function boot() {
-        UuidTrait::bootUuidTrait();
+        // UuidTrait::bootUsesUuid();
+        parent::boot();
+        static::creating(function ($model) {
+            if ( ! $model->getKey()) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
     }
 
-     /**
+    /**
      * Get the value indicating whether the IDs are incrementing.
      *
      * @return bool
@@ -35,15 +41,6 @@ class Otp_code extends Model
     {
         return 'string';
     }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'otp_code'
-    ];
 
     public function user()
     {

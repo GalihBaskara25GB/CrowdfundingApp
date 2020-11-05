@@ -18,7 +18,13 @@ class User extends Authenticatable
      * @return void
      */
     protected static function boot() {
-        UuidTrait::bootUuidTrait();
+        // UuidTrait::bootUsesUuid();
+        parent::boot();
+        static::creating(function ($model) {
+            if ( ! $model->getKey()) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
     }
 
      /**
@@ -39,6 +45,23 @@ class User extends Authenticatable
     public function getKeyType()
     {
         return 'string';
+    }
+
+    public function isAdmin()
+    {
+        $role = Role::find($this->role_id)->role;
+        if ($role == "admin") {
+            return true;
+        }
+        return false;
+    }
+
+    public function isEmailVerified()
+    {
+        if ($this->email_verified_at != null) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,4 +100,5 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Otp_code', 'user_id');
     }
+
 }

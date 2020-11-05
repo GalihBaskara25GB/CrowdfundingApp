@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use App\Traits\UuidTrait;
+// use App\Traits\UuidTrait;
 
-class Role extends Authenticatable
+class Role extends Model
 {
-    use Notifiable;
+    protected $table = 'roles';
+    protected $guarded = [];
 
     /**
      * The "booting" function of model
@@ -17,37 +17,14 @@ class Role extends Authenticatable
      * @return void
      */
     protected static function boot() {
-        UuidTrait::bootUuidTrait();
+        // UuidTrait::bootUsesUuid();
+        parent::boot();
+        static::creating(function ($model) {
+            if ( ! $model->getKey()) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
     }
-
-     /**
-     * Get the value indicating whether the IDs are incrementing.
-     *
-     * @return bool
-     */
-    public function getIncrementing()
-    {
-        return false;
-    }
-
-    /**
-     * Get the auto-incrementing key type.
-     *
-     * @return string
-     */
-    public function getKeyType()
-    {
-        return 'string';
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'role'
-    ];
 
     public function users()
     {
