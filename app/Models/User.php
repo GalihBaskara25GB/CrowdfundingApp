@@ -1,14 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use App\Traits\UuidTrait;
+use App\Models\Articles\Article;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -50,17 +52,13 @@ class User extends Authenticatable
     public function isAdmin()
     {
         $role = Role::find($this->role_id)->role;
-        if ($role == "admin") {
-            return true;
-        }
+        if ($role == "admin") return true;
         return false;
     }
 
     public function isEmailVerified()
     {
-        if ($this->email_verified_at != null) {
-            return true;
-        }
+        if ($this->email_verified_at != null) return true;
         return false;
     }
 
@@ -99,6 +97,30 @@ class User extends Authenticatable
     public function otp_code()
     {
         return $this->hasOne('App\Otp_code', 'user_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function articles() {
+        return $this->hasMany(Article::class);
     }
 
 }
