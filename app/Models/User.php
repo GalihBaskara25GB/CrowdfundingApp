@@ -68,7 +68,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'foto'
     ];
 
     /**
@@ -121,6 +121,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function articles() {
         return $this->hasMany(Article::class);
+    }
+
+    public function getRouteKeyName() {
+        return 'id';
     }
 
 }

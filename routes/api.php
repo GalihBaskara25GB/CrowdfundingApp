@@ -18,15 +18,23 @@
 // });
 
 Route::namespace('Auth')->group(function() {
-    Route::post('register', 'RegisterController');
-    Route::post('login', 'LoginController');
-    Route::post('logout', 'LogoutController');
+    Route::post('auth/register', 'RegisterController');
+    Route::post('auth/login', 'LoginController');
+    Route::post('auth/logout', 'LogoutController');
+    Route::post('auth/verification', 'VerificationController');
+    Route::post('auth/regenerate-otp', 'RegenerateOtpController');
+    Route::post('auth/update-password', 'UpdatePasswordController');
 });
 
 Route::namespace('Articles')->middleware('auth:api')->group(function() {
     Route::post('create-new-article', 'ArticleController@store');
     Route::patch('update-selected-article/{article}', 'ArticleController@update');
     Route::delete('delete-selected-article/{article}', 'ArticleController@destroy');
+});
+
+Route::namespace('Profile')->middleware('auth:api')->group(function() {
+    Route::post('profile/update-profile', 'ProfileController@update');
+    Route::get('profile/get-profile', 'ProfileController@show');
 });
 
 Route::get('articles/{article}', 'Articles\ArticleController@show');

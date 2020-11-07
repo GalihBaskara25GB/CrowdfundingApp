@@ -9,9 +9,9 @@ use Illuminate\Support\Str;
 class Otp_code extends Model
 {
     
-    protected $table = 'roles';
+    protected $table = 'otp_codes';
     protected $guarded = [];
-
+    
     protected static function boot() {
         // UuidTrait::bootUsesUuid();
         parent::boot();

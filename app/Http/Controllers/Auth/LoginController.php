@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,9 +21,28 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(! $token = auth()->attempt($request->only('email', 'password'))) {
-            return response(null, 401);
+        $user = User::where('email', $request->email)->first();
+        
+        if(!$user->isEmailVerified()) {
+            return response()->json([
+                'response_code' => '01',
+                'response_message' => 'Email yang anda masukkan belum diverifikasi'
+            ]);
+
         }
+
+        if(! $token = auth()->attempt($request->only('email', 'password'))) {
+            return response('Email or Password is wrong', 401);
+        }
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'user berhasil login',
+            'data' => [
+                'token' => $token,
+                'user' => $user->toArray(),
+            ],
+        ]);
 
         return response()->json(compact('token'));
     }
