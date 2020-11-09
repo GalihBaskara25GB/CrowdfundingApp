@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegenerateOtpRequest;
+use App\Events\UserRegisteredEvent;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\User;
@@ -38,9 +39,11 @@ class RegenerateOtpController extends Controller
                 'valid_until' => Carbon::now()->addMinutes(5),
             ]);            
             $data['user'] = User::find($user->getKey(), ['name', 'email', 'created_at', 'updated_at', 'id'])->toArray();
-
             $responseCode = '00';
             $responseMessage = 'Check your email for OTP Code, OTP Code valid until 5 minutes from now';
+
+            event(new UserRegisteredEvent($user, $otpCode));
+
         }
 
         return response()->json([

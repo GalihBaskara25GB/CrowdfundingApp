@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Otp_code;
+use App\Events\UserRegisteredEvent;
 
 class RegisterController extends Controller
 {
@@ -37,7 +38,8 @@ class RegisterController extends Controller
             $responseCode = '00';
             $responseMessage = 'Check your email for OTP Code, OTP Code valid until 5 minutes from now';
             $data['user'] = User::find($user->getKey(), ['name', 'email', 'created_at', 'updated_at', 'id'])->toArray();
-        
+            event(new UserRegisteredEvent($user, $otpCode));
+
         } else {
             $responseCode = '01';
             $responseMessage = 'An Error has Occured';

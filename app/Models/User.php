@@ -9,25 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use App\Traits\UuidTrait;
 use App\Models\Articles\Article;
+use App\Models\Role;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
-    /**
-     * The "booting" function of model
-     *
-     * @return void
-     */
-    protected static function boot() {
-        // UuidTrait::bootUsesUuid();
-        parent::boot();
-        static::creating(function ($model) {
-            if ( ! $model->getKey()) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
-            }
-        });
-    }
 
      /**
      * Get the value indicating whether the IDs are incrementing.
@@ -47,6 +33,12 @@ class User extends Authenticatable implements JWTSubject
     public function getKeyType()
     {
         return 'string';
+    }
+
+    protected function get_user_role_id()
+    {
+        $role = Role::where('role' , 'user')->first();
+        return $role->attributes['id'];
     }
 
     public function isAdmin()
@@ -89,7 +81,7 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function role()
+    public function roles()
     {
         return $this->belongsTo('App\Role');
     }
@@ -125,6 +117,23 @@ class User extends Authenticatable implements JWTSubject
 
     public function getRouteKeyName() {
         return 'id';
+    }
+
+    /**
+     * The "booting" function of model
+     *
+     * @return void
+     */
+    protected static function boot() {
+        // UuidTrait::bootUsesUuid();
+        parent::boot();
+        static::creating(function ($model) {
+            if ( ! $model->getKey()) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+           $model->role_id = $model->get_user_role_id();
+
+        });
     }
 
 }

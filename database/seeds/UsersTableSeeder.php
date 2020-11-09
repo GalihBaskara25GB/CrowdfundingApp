@@ -12,16 +12,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'id' => Str::uuid()->toString(),
-                'name' => 'Galih as admin',
-                'email' => 'galih@mail.com',
-                'password' => Hash::make('123'),
-                'email_verified_at' => now(),
-                'created_at'=> now(),
-                'updated_at' => now()
-            ]
-        ]);
+        
     }
 }
