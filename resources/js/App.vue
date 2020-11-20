@@ -49,7 +49,7 @@
 
         </v-navigation-drawer>
 
-        <v-app-bar app color="amber" dark>
+        <v-app-bar app color="amber" dark v-if="isHome">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Crowdfund Me</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -73,6 +73,23 @@
                 solo-inverted
             >
             </v-text-field>
+        </v-app-bar>
+
+        <v-app-bar app color="amber" dark v-else>
+            <v-btn icon @click.stop="$router.go(-1)">
+                <v-badge color="dark" overlap>
+                    <v-icon>mdi-arrow-left-circle</v-icon>
+                </v-badge>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+                <v-badge color="dark" overlap>
+                    <template v-slot:badge>
+                        <span>3</span>
+                    </template>
+                    <v-icon>mdi-cash-multiple</v-icon>
+                </v-badge>
+            </v-btn>
         </v-app-bar>
 
         <!-- Sizes your content based upon application components -->
@@ -109,6 +126,11 @@
                         { title: 'Campaigns', icon: 'mdi-hand-heart', route: 'campaigns' },
                     ],
                 guest: false
-            })
+        }),
+        computed: {
+            isHome() {
+                return (this.$route.path === '/' || this.$route.path === '/home')
+            }
+        }
     }
 </script>

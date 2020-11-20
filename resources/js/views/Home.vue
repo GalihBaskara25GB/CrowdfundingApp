@@ -6,10 +6,10 @@
                     All Campaigns <v-icon>mdi-chevron-right</v-icon>
                 </v-btn>
             </div>
-
+            
             <v-layout wrap>
-                <v-flex v-for="(campaign) in campaigns" :key="`category`+campaign.id" xs6>
-                    <v-card :to="`category`+campaign.id">
+                <v-flex v-for="(campaign) in campaigns" :key="`campaign-`+campaign.id" xs6>
+                    <v-card :to="`/campaign/`+campaign.id">
                         <v-img :src="campaign.image" max-height="200" class="white--text" >
                         <v-card-title
                             class="fill-height align-end"
@@ -32,16 +32,21 @@
             </div>
 
             <v-layout wrap>
-                <v-flex v-for="(blog) in blogs" :key="`category`+blog.id" xs6>
-                    <v-card :to="`category`+blog.id">
-                        <v-img :src="blog.images" max-height="300" class="dark--text" >
-                        <v-card-title
-                            class="fill-height align-end"
-                            v-text="blog.title" >
-                        </v-card-title>
+                
+                <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
+                    <v-carousel-item v-for="(blog) in blogs" :key="`blog-`+blog.id">
+                        <v-img :src="blog.images" class="fill-height" >
+                            <v-container fill-height fluid pa-0 ma-0>
+                                <v-layout fill-height align-end>
+                                    <v-flex xs-12 mx-2>
+                                        <span class="hedline white--text" v-text="blog.title"></span>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
                         </v-img>
-                    </v-card>
-                </v-flex>
+                    </v-carousel-item>
+                </v-carousel>
+
             </v-layout>
 
         </v-container>
