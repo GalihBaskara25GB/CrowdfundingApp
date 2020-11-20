@@ -9,7 +9,7 @@
      */
     trait UuidTrait
     {
-        public static function bootUsesUuid()
+        public static function UsesUuid()
         {
             parent::boot();
             static::creating(function ($model) {

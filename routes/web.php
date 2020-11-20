@@ -11,23 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/{any?}', 'app')->where('any', '.*');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::middleware(['auth', 'verifyEmail'])->group(function () {
-    Route::get('/route1', 'DashboardController@route1');
-});
+// Route::middleware(['auth', 'verifyEmail'])->group(function () {
+//     Route::get('/route1', 'DashboardController@route1');
+// });
 
 
-Route::middleware(['auth', 'verifyEmail', 'verifyAdmin'])->group(function () {
-    Route::get('/route2', 'DashboardController@route2');
-});
+// Route::middleware(['auth', 'verifyEmail', 'verifyAdmin'])->group(function () {
+//     Route::get('/route2', 'DashboardController@route2');
+// });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

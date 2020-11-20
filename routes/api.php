@@ -37,6 +37,22 @@ Route::namespace('Profile')->middleware('auth:api')->group(function() {
     Route::get('profile/get-profile', 'ProfileController@show');
 });
 
+Route::group([
+        'middleware' => 'api',
+        'prefix' => 'campaign'
+    ],function() {
+        Route::get('random/{count}', 'CampaignController@random');
+        Route::post('store', 'CampaignController@store');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'blog'
+],function() {
+    Route::get('random/{count}', 'BlogController@random');
+    Route::post('store', 'BlogController@store');
+});
+
 Route::get('articles/{article}', 'Articles\ArticleController@show');
 Route::get('articles', 'Articles\ArticleController@index');
 

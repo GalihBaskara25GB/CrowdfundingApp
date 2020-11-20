@@ -4582,6 +4582,10 @@
                 "laravel",
                 "ui"
             ],
+            "support": {
+                "issues": "https://github.com/laravel/ui/issues",
+                "source": "https://github.com/laravel/ui/tree/v1.0.0"
+            },
             "time": "2019-08-13T20:10:17+00:00"
         },
         {
