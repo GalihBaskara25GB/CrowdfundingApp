@@ -91,7 +91,7 @@ class CampaignController extends Controller
      */
     public function show($id)
     {
-        $campaign = Campaign::find($id)->first();
+        $campaign = Campaign::find($id);
         $data['campaign'] = $campaign;
 
         return response()->json([

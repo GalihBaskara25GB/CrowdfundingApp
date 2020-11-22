@@ -7,14 +7,7 @@
             
             <v-layout wrap>
                 <v-flex v-for="(campaign) in campaigns" :key="`campaign-`+campaign.id" xs6>
-                    <v-card :to="`campaign/`+campaign.id">
-                        <v-img :src="campaign.image" max-height="200" class="white--text" >
-                        <v-card-title
-                            class="fill-height align-end"
-                            v-text="campaign.title" >
-                        </v-card-title>
-                        </v-img>
-                    </v-card>
+                    <campaign-item :campaign="campaign" />
                 </v-flex>
             </v-layout>
             <v-pagination v-model="page" @input="go" :length="lengthPage" :total-visible="totalVisible"></v-pagination>
@@ -25,6 +18,8 @@
 </template>
 
 <script>
+import CampaignItem from '../components/CampaignItem.vue'
+
     export default {
         data: () => ({
             campaigns: [],
@@ -32,6 +27,9 @@
             lengthPage: 0,
             totalVisible: 1
         }),
+        components: {
+            'campaign-item': CampaignItem
+        },
         created() {
             this.go()
         },

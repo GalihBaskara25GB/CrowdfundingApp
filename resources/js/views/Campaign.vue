@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card v-if="campaign.id">
-            <v-img :src="campaign.image" height="200" class="white--text" >
+            <v-img :src="'/'+campaign.image" height="200" class="white--text" >
                 <v-card-title
                     class="fill-height align-end"
                     v-text="campaign.title" >
@@ -53,17 +53,16 @@
                 let url = '/api/campaign/'+ id
                 axios.get(url)
                     .then((response) => {
-                        console.log(response)
                         let { data } = response.data
                         this.campaign = data.campaign
                     })
-                    // .catch((error) => {
-                    //     let { responses } = error
-                    //     console.log(error.responses)
-                    // })
+                    .catch((error) => {
+                        let { responses } = error
+                        console.log(error.responses)
+                    })
             },
             donate() {
-                alert('Donate !!!')
+                this.$store.commit('incrementDonations')
             }
 
         },

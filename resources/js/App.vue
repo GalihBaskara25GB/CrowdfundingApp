@@ -27,6 +27,7 @@
                     v-for="(item, index) in menus"
                     :key="`menu-`+index"
                     :to="item.route"
+                    style="text-decoration: none"
                 >
                     <v-list-item-icon>
                         <v-icon left>{{ item.icon }}</v-icon>
@@ -56,8 +57,8 @@
 
             <v-btn icon>
                 <v-badge color="dark" overlap>
-                    <template v-slot:badge>
-                        <span>3</span>
+                    <template v-slot:badge v-if="counter > 0">
+                        <span>{{ counter }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
@@ -84,8 +85,8 @@
             <v-spacer></v-spacer>
             <v-btn icon>
                 <v-badge color="dark" overlap>
-                    <template v-slot:badge>
-                        <span>3</span>
+                    <template v-slot:badge v-if="counter > 0">
+                        <span>{{ counter }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
@@ -123,13 +124,16 @@
                 drawer: true,
                 menus: [
                         { title: 'Home', icon: 'mdi-home', route: '/' },
-                        { title: 'Campaigns', icon: 'mdi-hand-heart', route: 'campaigns' },
+                        { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
                     ],
                 guest: false
         }),
         computed: {
             isHome() {
                 return (this.$route.path === '/' || this.$route.path === '/home')
+            },
+            counter() {
+                return this.$store.getters.getCounterDonations
             }
         }
     }
