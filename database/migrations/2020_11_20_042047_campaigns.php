@@ -18,6 +18,9 @@ class Campaigns extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image')->default('image/campaign/default.jpg');
+            $table->string('address');
+            $table->integer('required');
+            $table->integer('collected')->default(0);
             $table->timestamps();
         });
     }
