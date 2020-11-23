@@ -13,5 +13,6 @@ class BlogsTableSeeder extends Seeder
     public function run()
     {
         factory(\App\Models\Blog::class, 10)->create();
+        dd('enter');
     }
 }
