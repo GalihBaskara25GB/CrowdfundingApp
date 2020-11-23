@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,10 @@ use App\Models\Role;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+    // protected $table = 'users';
 
+    // use UuidTrait;
+    // protected $guarded = [];
      /**
      * Get the value indicating whether the IDs are incrementing.
      *
