@@ -7,21 +7,6 @@ use App\Models\Campaign;
 
 class CampaignController extends Controller
 {
-    public function random($count) 
-    {
-        $campaigns = Campaign::select("*")
-                                ->inRandomOrder()
-                                ->limit($count)
-                                ->get();
-        $data['campaigns'] = $campaigns;
-
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'Data successfully loaded',
-            'data' => $data
-        ], 200);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -122,5 +107,34 @@ class CampaignController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function random($count) 
+    {
+        $campaigns = Campaign::select("*")
+                                ->inRandomOrder()
+                                ->limit($count)
+                                ->get();
+        $data['campaigns'] = $campaigns;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
+    }
+
+    public function search($keyword) 
+    {
+        $campaigns = Campaign::select("*")
+                                ->where('title', 'LIKE', "%".$keyword."%")
+                                ->get();
+        $data['campaigns'] = $campaigns;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
     }
 }

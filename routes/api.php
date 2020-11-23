@@ -44,6 +44,7 @@ Route::group([
         Route::get('/', 'CampaignController@index');
         Route::get('random/{count}', 'CampaignController@random');
         Route::get('/{id}', 'CampaignController@show');
+        Route::get('/search/{keyword}', 'CampaignController@search');
         Route::post('store', 'CampaignController@store');
 });
 

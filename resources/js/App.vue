@@ -1,6 +1,16 @@
 <template>
     <!-- App.vue -->
     <v-app>
+
+        <!-- Alert Transactions -->
+        <Alert />
+
+        <!-- Search Dialog -->
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="scale-transition">
+            <search @closed="closedDialog" />
+        </v-dialog>
+
+        <!-- Sidebar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
                 <v-list-item v-if="!guest">
@@ -57,8 +67,8 @@
 
             <v-btn icon>
                 <v-badge color="dark" overlap>
-                    <template v-slot:badge v-if="counter > 0">
-                        <span>{{ counter }}</span>
+                    <template v-slot:badge v-if="transactions > 0">
+                        <span>{{ transactions }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
@@ -72,6 +82,7 @@
                 label="search"
                 prepend-inner-icon="mdi-magnify"
                 solo-inverted
+                @click="dialog = true"
             >
             </v-text-field>
         </v-app-bar>
@@ -85,8 +96,8 @@
             <v-spacer></v-spacer>
             <v-btn icon>
                 <v-badge color="dark" overlap>
-                    <template v-slot:badge v-if="counter > 0">
-                        <span>{{ counter }}</span>
+                    <template v-slot:badge v-if="transactions > 0">
+                        <span>{{ transactions }}</span>
                     </template>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
@@ -118,22 +129,34 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+    
     export default {
         name: 'App',
+        components: {
+            Alert: () => import('./components/Alert'), 
+            Search: () => import('./components/Search')
+        },
         data: () => ({
                 drawer: true,
                 menus: [
                         { title: 'Home', icon: 'mdi-home', route: '/' },
                         { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
                     ],
-                guest: false
+                guest: false,
+                dialog: false,
         }),
         computed: {
             isHome() {
                 return (this.$route.path === '/' || this.$route.path === '/home')
             },
-            counter() {
-                return this.$store.getters.getCounterDonations
+            ...mapGetters({
+                transactions: 'transaction/transactions'
+            }),
+        },
+        methods: {
+            closedDialog(value) {
+                this.dialog = value
             }
         }
     }
