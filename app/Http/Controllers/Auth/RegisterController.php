@@ -34,11 +34,12 @@ class RegisterController extends Controller
             'valid_until' => Carbon::now()->addMinutes(5),
         ]);
 
-        if($user && $otpCode) {
+        
+        $sendmail = event(new UserRegisteredEvent($user, $otpCode));
+        if($user && $otpCode && $sendmail) {
             $responseCode = '00';
             $responseMessage = 'Check your email for OTP Code, OTP Code valid until 5 minutes from now';
             $data['user'] = User::find($user->getKey(), ['name', 'email', 'created_at', 'updated_at', 'id'])->toArray();
-            event(new UserRegisteredEvent($user, $otpCode));
 
         } else {
             $responseCode = '01';

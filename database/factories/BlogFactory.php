@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(Blog::class, function (Faker $faker) {
     return [
         'id' => Str::uuid()->toString(),
-        'title' => $faker->text,
-        'body' => $faker->paragraph,
+        'title' => $faker->sentence(5),
+        'body' => $faker->sentence(400),
     ];
 });

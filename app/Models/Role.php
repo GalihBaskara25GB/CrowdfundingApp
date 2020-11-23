@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-// use App\Traits\UuidTrait;
+use \App\Http\Traits\UsesUuid;
+
 
 class Role extends Model
 {
     protected $table = 'roles';
     protected $guarded = [];
+    use UsesUuid;
 
     /**
      * The "booting" function of model

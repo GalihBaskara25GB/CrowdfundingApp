@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Traits\UuidTrait;
+use \App\Http\Traits\UsesUuid;
 
 class Campaign extends Model
 {
     protected $table = 'campaigns';
     
-    use UuidTrait;
+    use UsesUuid;
     protected $guarded=[];
 }
