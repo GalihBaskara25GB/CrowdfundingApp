@@ -20,9 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(Campaign::class, function (Faker $faker) {
     return [
         'id' => Str::uuid()->toString(),
-        'title' => $faker->sentence(6),
-        'description' => $faker->sentence(300),
-        'address' => $faker->address,
-        'required' => $faker->numberBetween(1000000, 150000000),
+        'title' => $faker->text,
+        'description' => $faker->paragraph,
     ];
 });
