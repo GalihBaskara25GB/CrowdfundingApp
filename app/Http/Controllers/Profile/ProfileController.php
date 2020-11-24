@@ -57,7 +57,7 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         $photoName = auth::user()->getKey().'.'.$request->foto->extension();
-        $photoPath = 'public/image/user/';
+        $photoPath = '/public/image/user/';
         $name = request('name');
 
         if(!$uploadPhoto = $request->foto->move(public_path($photoPath), $photoName)) {

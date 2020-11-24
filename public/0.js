@@ -141,7 +141,7 @@ var render = function() {
             "v-img",
             {
               staticClass: "white--text",
-              attrs: { src: "/" + _vm.campaign.image, height: "200" }
+              attrs: { src: _vm.campaign.image, height: "200" }
             },
             [
               _c("v-card-title", {

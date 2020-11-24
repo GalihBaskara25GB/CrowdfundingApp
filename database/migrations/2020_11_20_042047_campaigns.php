@@ -17,7 +17,7 @@ class Campaigns extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->string('image')->default('image/campaign/default.jpg');
+            $table->string('image')->default('/public/image/campaign/default.jpg');
             $table->string('address');
             $table->integer('required');
             $table->integer('collected')->default(0);

@@ -20,10 +20,10 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-
+        
         $user = User::where('email', $request->email)->first();
         
-        if(!$user->isEmailVerified()) {
+        if(!is_null($user) && !$user->isEmailVerified()) {
             return response()->json([
                 'response_code' => '01',
                 'response_message' => 'Email yang anda masukkan belum diverifikasi'
@@ -32,7 +32,7 @@ class LoginController extends Controller
         }
 
         if(! $token = auth()->attempt($request->only('email', 'password'))) {
-            return response('Email or Password is wrong', 401);
+            return response()->json(['error' => 'Invalid Email or Password !'], 401);
         }
 
         return response()->json([

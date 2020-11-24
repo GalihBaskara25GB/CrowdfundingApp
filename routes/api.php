@@ -17,13 +17,19 @@
 //     return $request->user();
 // });
 
-Route::namespace('Auth')->group(function() {
-    Route::post('auth/register', 'RegisterController');
-    Route::post('auth/login', 'LoginController');
-    Route::post('auth/logout', 'LogoutController');
-    Route::post('auth/verification', 'VerificationController');
-    Route::post('auth/regenerate-otp', 'RegenerateOtpController');
-    Route::post('auth/update-password', 'UpdatePasswordController');
+Route::group([
+    'prefix' => 'auth',
+    'namespace' => 'Auth'
+], function() {
+
+    Route::post('register', 'RegisterController');
+    Route::post('login', 'LoginController');
+    Route::post('logout', 'LogoutController')->middleware('auth:api');
+    Route::post('verification', 'VerificationController');
+    Route::post('regenerate-otp', 'RegenerateOtpController');
+    Route::post('update-password', 'UpdatePasswordController');
+    Route::post('check-token', 'CheckTokenController')->middleware('auth:api');
+
 });
 
 Route::namespace('Articles')->middleware('auth:api')->group(function() {

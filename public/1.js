@@ -123,7 +123,6 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('api/campaign/random/2').then(function (response) {
       var data = response.data.data;
       _this.campaigns = data.campaigns;
-      console.log(_this.campaigns.id);
     })["catch"](function (error) {
       var response = error.response;
       console.log(response);
@@ -169,7 +168,7 @@ var render = function() {
             "v-img",
             {
               staticClass: "white--text",
-              attrs: { src: "/" + _vm.campaign.image, height: "200" }
+              attrs: { src: _vm.campaign.image, height: "200" }
             },
             [
               _c("v-card-title", {
@@ -338,7 +337,7 @@ var render = function() {
                         "v-img",
                         {
                           staticClass: "fill-height",
-                          attrs: { src: "/" + blog.images }
+                          attrs: { src: blog.images }
                         },
                         [
                           _c(

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LogoutController extends Controller
+class CheckTokenController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,10 +15,10 @@ class LogoutController extends Controller
      */
     public function __invoke(Request $request)
     {
-        auth()->logout();
         return response()->json([
             'response_code' => '00',
-            'response_message' => 'You have been logged out',
+            'response_message' => 'Valid Token',
+            'data' => true
         ], 200);
     }
 }

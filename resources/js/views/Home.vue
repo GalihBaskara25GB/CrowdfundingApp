@@ -28,7 +28,7 @@
                 
                 <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
                     <v-carousel-item v-for="(blog) in blogs" :key="`blog-`+blog.id">
-                        <v-img :src="'/'+blog.images" class="fill-height" >
+                        <v-img :src="blog.images" class="fill-height" >
                             <v-container fill-height fluid pa-0 ma-0>
                                 <v-layout fill-height align-end>
                                     <v-flex xs-12 mx-2>
@@ -64,7 +64,6 @@ import CampaignItem from '../components/CampaignItem.vue'
                 .then((response) => {
                     let { data } = response.data
                     this.campaigns = data.campaigns
-                    console.log(this.campaigns.id)
                 })
                 .catch((error) => {
                     let { response } = error

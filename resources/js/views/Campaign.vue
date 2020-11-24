@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card v-if="campaign.id">
-            <v-img :src="'/'+campaign.image" height="200" class="white--text" >
+            <v-img :src="campaign.image" height="200" class="white--text" >
                 <v-card-title
                     class="fill-height align-end"
                     v-text="campaign.title" >

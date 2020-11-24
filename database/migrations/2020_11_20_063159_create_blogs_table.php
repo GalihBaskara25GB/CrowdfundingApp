@@ -17,7 +17,7 @@ class CreateBlogsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('body');
-            $table->string('images')->default('image/blog/default.jpg');
+            $table->string('images')->default('/public/image/blog/default.jpg');
             $table->timestamps();
         });
     }
