@@ -34,7 +34,14 @@
                         :disabled="!valid"
                         @click="submit">
                         Login
-                        <v-icon>mdi-lock</v-icon>
+                        <v-icon>mdi-lock-open</v-icon>
+                    </v-btn>
+
+                    <v-btn
+                        color="primary lighten-1"
+                        @click="authProvider('google')">
+                        Login with Google
+                        <v-icon right dark>mdi-google</v-icon>
                     </v-btn>
                 </div>
             </v-form>
@@ -111,6 +118,23 @@
             },
             close() {
                 this.$emit('closed', false)
+            },
+            authProvider(provider) {
+                let url = '/api/auth/social/'+provider
+                 axios.get(url)
+                .then((response) => {
+                    let data = response.data
+                    window.location.href = data.url
+                    this.close()
+                })
+                .catch((error) => {
+                    let responses = error.response
+                    this.setAlert({
+                        status: true,
+                        color: 'error',
+                        text: responses.data.error
+                    })
+                })
             }
         }
     }

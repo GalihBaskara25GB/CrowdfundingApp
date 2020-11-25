@@ -43,6 +43,17 @@
             </v-layout>
 
         </v-container>
+
+        <v-container fluid>
+                <v-footer color="white" padless>
+                    <v-col
+                        class="text-center"
+                        cols="12"
+                    >
+                        &copy; {{ new Date().getFullYear() }} CrowdfundMe
+                    </v-col>
+                </v-footer>
+        </v-container>
     </div>
 
 </template>

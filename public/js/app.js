@@ -2159,14 +2159,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -2175,10 +2167,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Alert */ "./resources/js/components/Alert.vue"));
     },
     Search: function Search() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Search */ "./resources/js/components/Search.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Search */ "./resources/js/components/Search.vue"));
     },
     Login: function Login() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
     }
   },
   data: function data() {
@@ -2250,7 +2242,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   mounted: function mounted() {
-    if (this.user !== undefined) {
+    if (!this.user == undefined) {
       this.checkToken(this.user);
     }
   }
@@ -3809,27 +3801,6 @@ var render = function() {
             "v-container",
             { attrs: { fluid: "" } },
             [_c("v-slide-y-transition", [_c("router-view")], 1)],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-footer",
-            { attrs: { absolute: "", app: "" } },
-            [
-              _c("v-card-text", { staticClass: "text-center" }, [
-                _vm._v(
-                  "\n                © " +
-                    _vm._s(new Date().getFullYear()) +
-                    " CrowdfundMe\n            "
-                )
-              ])
-            ],
             1
           )
         ],
@@ -64800,13 +64771,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/campaign/:id',
     name: 'campaign',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/blogs',
     name: 'blogs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+    }
+  }, {
+    path: '/auth/social/:provider/callback',
+    name: 'social',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
     }
   }, {
     path: '*',

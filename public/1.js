@@ -106,6 +106,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -383,6 +394,32 @@ var render = function() {
                   )
                 }),
                 1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-container",
+        { attrs: { fluid: "" } },
+        [
+          _c(
+            "v-footer",
+            { attrs: { color: "white", padless: "" } },
+            [
+              _c(
+                "v-col",
+                { staticClass: "text-center", attrs: { cols: "12" } },
+                [
+                  _vm._v(
+                    "\n                    © " +
+                      _vm._s(new Date().getFullYear()) +
+                      " CrowdfundMe\n                "
+                  )
+                ]
               )
             ],
             1

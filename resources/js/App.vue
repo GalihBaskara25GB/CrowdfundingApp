@@ -124,14 +124,6 @@
             </v-container>
         </v-main>
 
-        <v-card>
-            <v-footer absolute app>
-                <v-card-text class="text-center">
-                    &copy; {{ new Date().getFullYear() }} CrowdfundMe
-                </v-card-text>
-            </v-footer>
-        </v-card>
-
     </v-app>
 </template>
 
@@ -206,7 +198,7 @@
             }
         },
         mounted() {
-            if (this.user !== undefined) {
+            if (!this.user == undefined) {
                 this.checkToken(this.user)
             }
         }

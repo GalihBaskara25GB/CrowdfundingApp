@@ -28,6 +28,11 @@ const router = new Router({
                 component: () => import('./views/Blogs.vue')
             },
             {
+                path: '/auth/social/:provider/callback',
+                name: 'social',
+                component: () => import('./views/Social.vue')
+            },
+            {
                 path: '*',
                 redirect: '/'
             },

@@ -18,6 +18,7 @@
 // });
 
 Route::group([
+    'middleware' => 'api',
     'prefix' => 'auth',
     'namespace' => 'Auth'
 ], function() {
@@ -29,6 +30,9 @@ Route::group([
     Route::post('regenerate-otp', 'RegenerateOtpController');
     Route::post('update-password', 'UpdatePasswordController');
     Route::post('check-token', 'CheckTokenController')->middleware('auth:api');
+
+    Route::get('/social/{provider}', 'SocialiteController@redirectToProvider');
+    Route::get('/social/{provider}/callback', 'SocialiteController@handleProviderCallback');
 
 });
 
