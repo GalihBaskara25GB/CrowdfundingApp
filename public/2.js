@@ -39,6 +39,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'alert',
@@ -90,7 +92,7 @@ var render = function() {
     "v-snackbar",
     {
       attrs: {
-        color: "color",
+        color: _vm.color,
         bottom: "",
         "multi-line": "",
         outlined: "",
@@ -106,14 +108,16 @@ var render = function() {
                 "v-btn",
                 _vm._b(
                   {
-                    attrs: { color: "red", text: "" },
+                    staticClass: "ma-2",
+                    attrs: { "x-small": "", fab: "", color: _vm.color },
                     on: { click: _vm.close }
                   },
                   "v-btn",
                   attrs,
                   false
                 ),
-                [_vm._v("\n            Close\n        ")]
+                [_c("v-icon", [_vm._v("mdi-close")])],
+                1
               )
             ]
           }

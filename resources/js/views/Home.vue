@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container class="ma-0 pa-0" grid-list-sm>
+        <v-container fluid class="ma-0 pa-0" grid-list-sm>
             <div class="text-right">
                 <v-btn small text to="/campaigns" class="blue--text" style="text-decoration: none">
                     All Campaigns <v-icon>mdi-chevron-right</v-icon>
@@ -17,7 +17,7 @@
     
         <v-divider></v-divider>
 
-        <v-container class="ma-0 pa-0" grid-list-sm>
+        <v-container fluid class="ma-0 pa-0" grid-list-sm>
             <div class="text-right">
                 <v-btn small text to="/blogs" class="blue--text" style="text-decoration: none">
                     All Blogs <v-icon>mdi-chevron-right</v-icon>
@@ -81,7 +81,7 @@ import CampaignItem from '../components/CampaignItem.vue'
                     console.log(response)
                 })
             
-            axios.get('api/blog/random/2')
+            axios.get('api/blog/random/5')
                 .then((response) => {
                     let { data } = response.data
                     this.blogs = data.blogs

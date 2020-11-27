@@ -23,12 +23,12 @@ class RegenerateOtpController extends Controller
         $user = User::where('email', $request->email)->first();
         if(!$user) {
             $responseCode = '01';
-            $responseMessage = 'Email tidak ditemukan';
+            $responseMessage = 'Email Not Found';
             $data[] = [];
 
         } elseif($user->email_verified_at != null) {
             $responseCode = '01';
-            $responseMessage = 'Email yang anda masukkan sudah terverifikasi, silahkan masukkan email lain';
+            $responseMessage = 'Email You\'ve Entered Already Verified, Enter Another Email !';
             $data[] = [];
             
         } else {   

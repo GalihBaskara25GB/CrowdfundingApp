@@ -2155,10 +2155,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -2167,10 +2163,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Alert */ "./resources/js/components/Alert.vue"));
     },
     Search: function Search() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Search */ "./resources/js/components/Search.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/Search */ "./resources/js/components/Search.vue"));
     },
     Login: function Login() {
       return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
+    },
+    Register: function Register() {
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Register */ "./resources/js/components/Register.vue"));
     }
   },
   data: function data() {
@@ -3511,6 +3510,8 @@ var render = function() {
                                   "v-btn",
                                   {
                                     attrs: {
+                                      tile: "",
+                                      outlined: "",
                                       block: "",
                                       color: "red",
                                       dark: ""
@@ -3583,7 +3584,7 @@ var render = function() {
                         "v-btn",
                         {
                           staticClass: "mb-1",
-                          attrs: { block: "", color: "primary" },
+                          attrs: { tile: "", block: "", color: "amber" },
                           on: {
                             click: function($event) {
                               return _vm.setDialogComponent("login")
@@ -3603,7 +3604,12 @@ var render = function() {
                         "v-btn",
                         {
                           staticClass: "mb-1",
-                          attrs: { block: "", color: "suceess" }
+                          attrs: { tile: "", block: "", outlined: "" },
+                          on: {
+                            click: function($event) {
+                              return _vm.setDialogComponent("register")
+                            }
+                          }
                         },
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
@@ -3658,7 +3664,7 @@ var render = function() {
       _vm.isHome
         ? _c(
             "v-app-bar",
-            { attrs: { app: "", color: "amber", dark: "" } },
+            { attrs: { app: "", color: "orange", dark: "" } },
             [
               _c("v-app-bar-nav-icon", {
                 on: {
@@ -3675,7 +3681,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { icon: "" } },
+                { attrs: { tile: "", icon: "" } },
                 [
                   _c(
                     "v-badge",
@@ -3730,12 +3736,12 @@ var render = function() {
           )
         : _c(
             "v-app-bar",
-            { attrs: { app: "", color: "amber", dark: "" } },
+            { attrs: { app: "", color: "orange", dark: "" } },
             [
               _c(
                 "v-btn",
                 {
-                  attrs: { icon: "" },
+                  attrs: { tile: "", icon: "" },
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -3747,18 +3753,24 @@ var render = function() {
                   _c(
                     "v-badge",
                     { attrs: { color: "dark", overlap: "" } },
-                    [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+                    [
+                      _c("v-icon", { attrs: { dark: "" } }, [
+                        _vm._v("mdi-arrow-left")
+                      ])
+                    ],
                     1
                   )
                 ],
                 1
               ),
               _vm._v(" "),
+              _c("v-toolbar-title", [_vm._v("Crowdfund Me")]),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { icon: "" } },
+                { attrs: { tile: "", icon: "" } },
                 [
                   _c(
                     "v-badge",
@@ -64771,19 +64783,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/campaign/:id',
     name: 'campaign',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/blogs',
     name: 'blogs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
     }
   }, {
     path: '/auth/social/:provider/callback',
     name: 'social',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
     }
   }, {
     path: '*',

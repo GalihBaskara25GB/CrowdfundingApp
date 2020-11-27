@@ -26,7 +26,7 @@ class LoginController extends Controller
         if(!is_null($user) && !$user->isEmailVerified()) {
             return response()->json([
                 'response_code' => '01',
-                'response_message' => 'Email yang anda masukkan belum diverifikasi'
+                'response_message' => 'Email is Not Verified'
             ]);
 
         }
@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         return response()->json([
             'response_code' => '00',
-            'response_message' => 'user berhasil login',
+            'response_message' => 'Login Success',
             'data' => [
                 'token' => $token,
                 'user' => $user->toArray(),

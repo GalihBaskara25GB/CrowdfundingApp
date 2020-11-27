@@ -42,37 +42,38 @@
 </template>
 
 <script>
-    import { mapMutations, mapActions } from 'vuex'
-    export default {
-        name: 'search',
-        components: {
-            CampaignItem: () => import('./CampaignItem')
-        },
-        data: () => ({
-            keyword: '',
-            campaigns: [],
-        }),
-        methods: {
-            doSearch() {
-                let keyword = this.keyword
-                if (keyword.length>0) {
-                    let url = '/api/campaign/search/'+ keyword
-                    axios.get(url)
-                        .then((response) => {
-                            let { data } = response.data
-                            this.campaigns = data.campaigns
-                        })
-                        .catch((error) => {
-                            console.log(error)
+import { mapMutations, mapActions } from 'vuex'
+export default {
+    name: 'search',
+    components: {
+        CampaignItem: () => import('./CampaignItem')
+    },
+    data: () => ({
+        keyword: '',
+        campaigns: [],
+    }),
+    methods: {
+        doSearch() {
+            let keyword = this.keyword
+            if (keyword.length>0) {
+                let url = '/api/campaign/search/'+ keyword
+                axios.get(url)
+                    .then((response) => {
+                        let { data } = response.data
+                        this.campaigns = data.campaigns
                     })
-                } else {
-                    this.campaigns = []
-                }
-                
-            },
-            close() {
-                this.$emit('closed', false)
-            },
+                    .catch((error) => {
+                        console.log(error)
+                })
+            } else {
+                this.campaigns = []
+            }
+            
         },
-    }
+        close() {
+            this.keyword = ''
+            this.$emit('closed', false)
+        },
+    },
+}
 </script>

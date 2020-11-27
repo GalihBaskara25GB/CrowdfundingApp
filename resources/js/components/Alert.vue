@@ -1,7 +1,7 @@
 <template>
     <v-snackbar
         v-model="alert"
-        color="color"
+        :color="color"
         bottom
         multi-line
         outlined
@@ -10,12 +10,14 @@
         {{ text }}
         <template v-slot:action="{ attrs }">
             <v-btn
-                color="red"
-                text
+                class="ma-2"
+                x-small
+                fab
+                :color="color"
                 v-bind="attrs"
                 @click="close"
             >
-                Close
+                <v-icon>mdi-close</v-icon>
             </v-btn>
         </template>
     </v-snackbar>    

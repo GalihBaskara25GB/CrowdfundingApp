@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
       var response = error.response;
       console.log(response);
     });
-    axios.get('api/blog/random/2').then(function (response) {
+    axios.get('api/blog/random/5').then(function (response) {
       var data = response.data.data;
       _this.blogs = data.blogs;
     })["catch"](function (error) {
@@ -258,7 +258,7 @@ var render = function() {
     [
       _c(
         "v-container",
-        { staticClass: "ma-0 pa-0", attrs: { "grid-list-sm": "" } },
+        { staticClass: "ma-0 pa-0", attrs: { fluid: "", "grid-list-sm": "" } },
         [
           _c(
             "div",
@@ -302,7 +302,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-container",
-        { staticClass: "ma-0 pa-0", attrs: { "grid-list-sm": "" } },
+        { staticClass: "ma-0 pa-0", attrs: { fluid: "", "grid-list-sm": "" } },
         [
           _c(
             "div",

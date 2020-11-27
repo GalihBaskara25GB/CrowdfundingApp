@@ -22,12 +22,12 @@ class UpdatePasswordController extends Controller
         $user = User::where('email', $request->email)->first();
         if(!$user) {
             $responseCode = '01';
-            $responseMessage = 'Email tidak ditemukan';
+            $responseMessage = 'Email not Found';
             $data[] = [];
 
         } elseif(!$user->isEmailVerified()) {
             $responseCode = '01';
-            $responseMessage = 'Email yang anda masukkan belum diverifikasi';
+            $responseMessage = 'Enter a Verified Email';
             $data[] = [];
             
         } else {
@@ -36,7 +36,7 @@ class UpdatePasswordController extends Controller
             $data['user'] = $user->toArray();
 
             $responseCode = '00';
-            $responseMessage = 'Password berhasil diubah';
+            $responseMessage = 'Password Successfully Updated, Registration Success !!';
         }
 
         return response()->json([

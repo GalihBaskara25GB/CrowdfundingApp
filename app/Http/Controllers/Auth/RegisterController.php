@@ -24,10 +24,16 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
-            // 'password' => Hash::make(request('password')),
         ]);
 
-        // dd($user->getKey());
+        if(!$user) {
+            return response()->json([
+                'response_code' => '01',
+                'response_message' => 'Email has already taken',
+                'data' => []
+                ]);
+        };
+
         $otpCode = Otp_code::create([
             'otp_code' => Str::random(6),
             'user_id' => $user->getKey(),

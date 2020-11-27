@@ -22,12 +22,12 @@ class VerificationController extends Controller
         $otpCode = Otp_code::where('otp_code', $request->otp_code)->first();
         if(!$otpCode) {
             $responseCode = '01';
-            $responseMessage = 'OTP Code tidak ditemukan';
+            $responseMessage = 'OTP Code not Found !';
             $data[] = [];
 
         } elseif(Carbon::now() > $otpCode->valid_until) {
             $responseCode = '01';
-            $responseMessage = 'OTP Code sudah kadaluarsa, silahkan regenerate ulang';
+            $responseMessage = 'OTP Code has expired, please regenerate OTP Code !';
             $data[] = [];
             
         } else {   
@@ -38,7 +38,7 @@ class VerificationController extends Controller
             $data['user'] = $user;
 
             $responseCode = '00';
-            $responseMessage = 'OTP telah diterima, silahkan masukkan password anda';
+            $responseMessage = 'OTP has been verified, Update Your Password';
         }
 
         return response()->json([
