@@ -342,7 +342,10 @@ var render = function() {
                 _vm._l(_vm.blogs, function(blog) {
                   return _c(
                     "v-carousel-item",
-                    { key: "blog-" + blog.id },
+                    {
+                      key: "blog-" + blog.id,
+                      attrs: { to: "/blog/" + blog.id }
+                    },
                     [
                       _c(
                         "v-img",
@@ -373,7 +376,7 @@ var render = function() {
                                     { attrs: { "xs-12": "", "mx-2": "" } },
                                     [
                                       _c("span", {
-                                        staticClass: "hedline white--text",
+                                        staticClass: "headline white-text",
                                         domProps: {
                                           textContent: _vm._s(blog.title)
                                         }

@@ -7,21 +7,6 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    public function random($count) 
-    {
-        $blogs = Blog::select("*")
-                                ->inRandomOrder()
-                                ->limit($count)
-                                ->get();
-        $data['blogs'] = $blogs;
-
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'Data successfully loaded',
-            'data' => $data
-        ], 200);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +14,14 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $blogs = Blog::paginate(6);
+        $data['blogs'] = $blogs;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
     }
 
     /**
@@ -84,7 +76,14 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $blog = Blog::find($id);
+        $data['blog'] = $blog;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
     }
 
     /**
@@ -109,4 +108,34 @@ class BlogController extends Controller
     {
         //
     }
+
+    public function random($count) 
+    {
+        $blogs = Blog::select("*")
+                                ->inRandomOrder()
+                                ->limit($count)
+                                ->get();
+        $data['blogs'] = $blogs;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
+    }
+
+    public function search($keyword) 
+    {
+        $blogs = Blog::select("*")
+                                ->where('title', 'LIKE', "%".$keyword."%")
+                                ->get();
+        $data['blogs'] = $blogs;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'Data successfully loaded',
+            'data' => $data
+        ], 200);
+    }
+
 }

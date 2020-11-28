@@ -135,12 +135,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'register',
   components: {
     'validation-errors': function validationErrors() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./ValidationError */ "./resources/js/components/ValidationError.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./ValidationError */ "./resources/js/components/ValidationError.vue"));
     }
   },
   data: function data() {
@@ -468,7 +472,8 @@ var render = function() {
                           rules: [_vm.rules.required],
                           label: "Full Name",
                           maxlength: "40",
-                          required: ""
+                          required: "",
+                          "append-icon": "mdi-account"
                         },
                         model: {
                           value: _vm.fullName,
@@ -483,7 +488,8 @@ var render = function() {
                         attrs: {
                           rules: _vm.emailRules,
                           label: "E-mail",
-                          required: ""
+                          required: "",
+                          "append-icon": "mdi-email"
                         },
                         model: {
                           value: _vm.email,
@@ -546,8 +552,7 @@ var render = function() {
                       _c("v-text-field", {
                         attrs: {
                           label: "OTP Codes",
-                          rules: [_vm.rules.required],
-                          required: ""
+                          rules: [_vm.rules.required]
                         },
                         model: {
                           value: _vm.otpCode,

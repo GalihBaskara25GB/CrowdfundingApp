@@ -62,7 +62,10 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'blog'
 ],function() {
+    Route::get('/', 'BlogController@index');
     Route::get('random/{count}', 'BlogController@random');
+    Route::get('/{id}', 'BlogController@show');
+    Route::get('/search/{keyword}', 'BlogController@search');
     Route::post('store', 'BlogController@store');
 });
 

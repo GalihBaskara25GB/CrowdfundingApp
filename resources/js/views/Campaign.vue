@@ -26,7 +26,9 @@
                 </v-simple-table>
 
                 Descriptions : <br>
-                {{ campaign.description }}
+                <p class="body-text text-justify">
+                    {{ campaign.description }}
+                </p>
             </v-card-text>
             <v-card-actions>
                 <v-btn block color="primary" @click="donate" :disabled="campaign.collected >= campaign.required">
@@ -40,7 +42,7 @@
 </template>
 
 <script>
-    import { mapMutations, mapActions } from 'vuex'
+    import { mapGetters, mapMutations, mapActions } from 'vuex'
     export default {
         data: () => ({
             campaign: {},
@@ -48,19 +50,27 @@
         created() {
             this.go()
         },
+        computed: {
+            ...mapGetters({
+                user: 'auth/user',
+            }),
+        },
+        mounted() {
+            console.log(this.user)
+        },
         methods: {
             go() {
                 let { id } = this.$route.params
                 let url = '/api/campaign/'+ id
                 axios.get(url)
-                    .then((response) => {
-                        let { data } = response.data
-                        this.campaign = data.campaign
-                    })
-                    .catch((error) => {
-                        let { responses } = error
-                        console.log(error.responses)
-                    })
+                .then((response) => {
+                    let { data } = response.data
+                    this.campaign = data.campaign
+                })
+                .catch((error) => {
+                    let { responses } = error
+                    console.log(error.responses)
+                })
             },
             ...mapMutations({
                 tambahTransaksi: 'transaction/insert'
@@ -69,12 +79,20 @@
                 setAlert: 'alert/set'
             }),
             donate() {
-                this.tambahTransaksi()
-                this.setAlert({
-                    status: true,
-                    coloe: 'success',
-                    text: 'Transaction Success !!'
-                })
+                if(!this.user.user) {
+                    this.setAlert({
+                        status: true,
+                        color: 'warning',
+                        text: 'You Must Login to Donate !!'
+                    })
+                } else {
+                    this.tambahTransaksi()
+                    this.setAlert({
+                        status: true,
+                        color: 'success',
+                        text: 'Transaction Success !!'
+                    })
+                }
             }
 
         },

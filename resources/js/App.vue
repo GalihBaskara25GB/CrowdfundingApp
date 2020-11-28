@@ -124,80 +124,87 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex'
-    
-    export default {
-        name: 'App',
-        components: {
-            Alert: () => import('./components/Alert'), 
-            Search: () => import('./components/Search'),
-            Login: () => import('./components/Login'),
-            Register: () => import('./components/Register'),
+import { mapActions, mapGetters } from 'vuex'
+
+export default {
+    name: 'App',
+    components: {
+        Alert: () => import('./components/Alert'), 
+        Search: () => import('./components/Search'),
+        Login: () => import('./components/Login'),
+        Register: () => import('./components/Register'),
+    },
+    data: () => ({
+            drawer: true,
+            menus: [
+                    { title: 'Home', icon: 'mdi-home', route: '/' },
+                    { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
+                    { title: 'Blogs', icon: 'mdi-newspaper', route: '/blogs' },
+                ],
+    }),
+    computed: {
+        isHome() {
+            return (this.$route.path === '/' || this.$route.path === '/home')
         },
-        data: () => ({
-                drawer: true,
-                menus: [
-                        { title: 'Home', icon: 'mdi-home', route: '/' },
-                        { title: 'Campaigns', icon: 'mdi-hand-heart', route: '/campaigns' },
-                    ],
+        ...mapGetters({
+            transactions: 'transaction/transactions',
+            guest: 'auth/guest',
+            user: 'auth/user',
+            dialogStatus: 'dialog/status',
+            currentComponent: 'dialog/component',
         }),
-        computed: {
-            isHome() {
-                return (this.$route.path === '/' || this.$route.path === '/home')
+        dialog: {
+            get() {
+                return this.dialogStatus
             },
-            ...mapGetters({
-                transactions: 'transaction/transactions',
-                guest: 'auth/guest',
-                user: 'auth/user',
-                dialogStatus: 'dialog/status',
-                currentComponent: 'dialog/component',
-            }),
-            dialog: {
-                get() {
-                    return this.dialogStatus
-                },
-                set(value) {
-                    this.setDialogStatus(value)
-                }
-            }
-        },
-        methods: {
-            ...mapActions({
-                setDialogStatus: 'dialog/setStatus',
-                setDialogComponent: 'dialog/setComponent',
-                setAuth: 'auth/set',
-                setAlert: 'alert/set',
-                checkToken: 'auth/checkToken',
-            }),
-            logout() {
-                let config = {
-                    headers: {
-                        'Authorization': 'Bearer ' + this.user.token,
-                    }
-                }
-                axios.post('/api/auth/logout', {}, config)
-                .then((response) => {
-                    this.setAuth({})
-                    this.setAlert({
-                        status: true,
-                        color: 'success',
-                        text: response.data.response_message
-                    })
-                })
-                .catch((error) => {
-                    let responses = error.response
-                    this.setAlert({
-                        status: true,
-                        color: 'error',
-                        text: responses.data.error
-                    })
-                })
-            }
-        },
-        mounted() {
-            if (!this.user == undefined) {
-                this.checkToken(this.user)
+            set(value) {
+                this.setDialogStatus(value)
             }
         }
+    },
+    methods: {
+        ...mapActions({
+            setDialogStatus: 'dialog/setStatus',
+            setDialogComponent: 'dialog/setComponent',
+            setAuth: 'auth/set',
+            setAlert: 'alert/set',
+            checkToken: 'auth/checkToken',
+        }),
+        logout() {
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + this.user.token,
+                }
+            }
+            axios.post('/api/auth/logout', {}, config)
+            .then((response) => {
+                this.setAuth({})
+                this.setAlert({
+                    status: true,
+                    color: 'success',
+                    text: response.data.response_message
+                })
+            })
+            .catch((error) => {
+                let responses = error.response
+                this.setAlert({
+                    status: true,
+                    color: 'error',
+                    text: responses.data.error
+                })
+            })
+        }
+    },
+    mounted() {
+        if (!this.user == undefined) {
+            this.checkToken(this.user)
+        }
     }
+}
 </script>
+
+<style>
+  .body-text {
+    font-size: 1.2em;
+  }
+</style>

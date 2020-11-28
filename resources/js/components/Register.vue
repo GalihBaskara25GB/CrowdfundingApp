@@ -18,12 +18,16 @@
                         :rules="[rules.required]" 
                         label="Full Name" 
                         maxlength="40" 
-                        required></v-text-field>
+                        required
+                        :append-icon="'mdi-account'"
+                      ></v-text-field>
                       <v-text-field 
                         v-model="email" 
                         :rules="emailRules" 
                         label="E-mail" 
-                        required></v-text-field>
+                        required
+                        :append-icon="'mdi-email'"
+                      ></v-text-field>
                   <v-spacer></v-spacer>
                   <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
                       <v-btn 
@@ -48,7 +52,7 @@
                     v-model="otpCode" 
                     label="OTP Codes"
                     :rules="[rules.required]" 
-                    required>
+                  >
                   </v-text-field>
                   
                   <v-spacer></v-spacer>

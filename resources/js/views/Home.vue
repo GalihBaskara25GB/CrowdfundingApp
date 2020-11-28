@@ -27,12 +27,12 @@
             <v-layout wrap>
                 
                 <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
-                    <v-carousel-item v-for="(blog) in blogs" :key="`blog-`+blog.id">
+                    <v-carousel-item v-for="(blog) in blogs" :key="`blog-`+blog.id" :to="'/blog/'+blog.id">
                         <v-img :src="blog.images" class="fill-height" >
                             <v-container fill-height fluid pa-0 ma-0>
                                 <v-layout fill-height align-end>
                                     <v-flex xs-12 mx-2>
-                                        <span class="hedline white--text" v-text="blog.title"></span>
+                                        <span class="headline white-text" v-text="blog.title"></span>
                                     </v-flex>
                                 </v-layout>
                             </v-container>
