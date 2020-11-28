@@ -29,7 +29,7 @@
             </v-alert>
 
             <!-- Search result will displayed here -->
-            <v-container class="ma-0 pa-0" grid-list-sm>
+            <v-container fluid class="ma-0 pa-0" grid-list-sm>
                 <v-layout wrap>
                     <v-flex v-for="(campaign) in campaigns" :key="`campaign-`+campaign.id">
                         <campaign-item :campaign="campaign" @click.native="close" />

@@ -12,6 +12,6 @@ class CampaignsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Campaign::class, 10)->create();
+        factory(\App\Models\Campaign::class, 15)->create();
     }
 }

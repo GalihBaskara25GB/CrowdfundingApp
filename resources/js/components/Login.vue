@@ -28,22 +28,26 @@
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 ></v-text-field>
 
-                <div class="text-xs-center">
+                <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
                     <v-btn
+                        block
+                        outlined
                         color="orange lighten-1"
                         :disabled="!valid"
                         @click="submit">
                         Login
                         <v-icon>mdi-lock-open</v-icon>
                     </v-btn>
-
+                </v-col>
+                <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
                     <v-btn
+                        block
                         color="primary lighten-1"
                         @click="authProvider('google')">
                         Login with Google
                         <v-icon right dark>mdi-google</v-icon>
                     </v-btn>
-                </div>
+                </v-col>
             </v-form>
         </v-container>
     </v-card>

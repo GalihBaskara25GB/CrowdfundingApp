@@ -18,11 +18,13 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(Campaign::class, function (Faker $faker) {
+    $requiredFund = $faker->numberBetween(1000000, 150000000);
     return [
         'id' => Str::uuid()->toString(),
         'title' => $faker->sentence(6),
         'description' => $faker->sentence(300),
         'address' => $faker->address,
-        'required' => $faker->numberBetween(1000000, 150000000),
+        'required' => $requiredFund,
+        'collected' => $faker->numberBetween(0, $requiredFund),
     ];
 });

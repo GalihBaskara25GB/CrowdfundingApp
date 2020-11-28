@@ -33,7 +33,7 @@ class UserRegisteredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')
+        return $this->from('customer_care@crowdfundMe.com')
                 ->view('send_email_user_registered')
                 ->with([
                         'name' => $this->user->name,

@@ -78,7 +78,7 @@
 
                 <div v-if="showUpdatePassword">
                   <v-col cols="12">
-                    welcome <b>{{ fullName }}</b>, please set your account password.
+                    Welcome <b>{{ fullName }}</b>, please set your account password.
                   </v-col>
                   
                   <v-text-field
